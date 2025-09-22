@@ -1,5 +1,4 @@
 import random
-
 names = ["A", "B", "C", "D", "E", "F"]
 
 for i in range(len(names) - 1, 0, -1):
