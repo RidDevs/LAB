@@ -1,0 +1,41 @@
+1001|The Lost Horizon|Isabella Reed|Yes
+1002|Mystery of the Old House|Isabella Reed|Yes
+1003|Journey to the Stars|James Carter|Yes
+1004|The Hidden Truth|Isabella Reed|Yes
+1005|Whispers of the Forest|James Carter|Yes
+1006|Tales of the Ancient Kingdom|Lucas Gray|Yes
+1007|Shadows of the Past|Liam Matthews|Yes
+1008|Rise of the Warriors|Sebastian Clark|Yes
+1009|The Silent River|Lily Adams|Yes
+1010|Legends of the Night Sky|Isabella Reed|Yes
+1011|Footprints in Time|Amelia Scott|Yes
+1012|Secrets of the Ocean|Sebastian Clark|Yes
+1013|The Forgotten Path|Isabella Reed|Yes
+1014|Echoes of the Mountain|Olivia Harper|Yes
+1015|Bound by Honor|Logan Hayes|Yes
+1016|The Last Explorer|Amelia Scott|Yes
+1017|Winds of Destiny|Logan Hayes|Yes
+1018|The Eternal Flame|Lucas Gray|Yes
+1019|Quest for the Golden Age|Sophia Bennett|Yes
+1020|The Crystal Mirror|Charlotte Evans|Yes
+1021|The Enchanted Valley|Mason Brooks|Yes
+1022|Storm over the Horizon|Ethan Collins|Yes
+1023|The Phantom Village|Mia Parker|Yes
+1024|Valley of the Kings|Sophia Bennett|Yes
+1025|The Darkened Woods|Elijah Cole|Yes
+1026|The Silver Compass|Sophia Bennett|Yes
+1027|Bridge to Tomorrow|Liam Matthews|Yes
+1028|Waves of Hope|Emma Knight|Yes
+1029|Realm of Dreams|Elijah Cole|Yes
+1030|The Final Chapter|James Carter|Yes
+1031|The Sacred Scroll|Mason Brooks|Yes
+1032|Whispers of Eternity|Mia Parker|Yes
+1033|Land of the Brave|Sophia Bennett|Yes
+1034|The Iron Fortress|Elijah Cole|Yes
+1035|The Sapphire Crown|Lily Adams|Yes
+1036|Chronicles of the Unknown|Harper Lewis|Yes
+1037|The Burning Isles|Charlotte Evans|Yes
+1038|Paths of Glory|Sophia Bennett|Yes
+1039|Stormcaller's Rise|Emma Knight|Yes
+1041|yooo|ayushman|no
+1042|kaku|arin|yes
