@@ -11,7 +11,7 @@ class Sum{
 
 int main() {
     Sum s;
-    cout << s.add(10, 20) << endl;
-    cout << s.add(2.5f, 4.5f);
+    cout << s.add(100, 21) << endl;
+    cout << s.add(7.1f, 9.5f);
     return 0;
 }

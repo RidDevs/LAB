@@ -13,12 +13,13 @@ public:
 };
 
 int main() {
-    Student s[3];
-    for(int i=0;i<3;i++)
+    Student s[15];
+    for(int i=0;i<15;i++)
         s[i].setRoll(i+1);
 
-    for(int i=0;i<3;i++)
+    for(int i=0;i<15;i++)
         s[i].display();
 
     return 0;
 }
+

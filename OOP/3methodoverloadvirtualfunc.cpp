@@ -1,24 +1,26 @@
 #include <iostream>
 using namespace std;
 
-class Base {
+class Employee {
 public:
-    virtual void show() {
-        cout << "Base class show" << endl;
+    virtual void work() {
+        cout << "employee work in office." << endl;
     }
 };
 
-class Derived : public Base {
+class Manager : public Employee {
 public:
-    void show() {
-        cout << "Derived class show" << endl;
+    void work() {
+        cout << "manager manage team." << endl;
     }
 };
 
 int main() {
-    Base* b;
-    Derived d;
-    b = &d;
-    b->show();
+    Employee *e;     
+    Manager m;
+
+    e = &m;          
+    e->work();       
+
     return 0;
 }
