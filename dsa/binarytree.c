@@ -28,6 +28,21 @@ struct Node* insertRight(struct Node* root, int value) {
     return root->right;
 }
 
+
+
+struct Node* insertBST(struct Node* root, int value) {
+    if (root == NULL) {
+        return createNode(value);
+    }
+
+    if (value < root->data)
+        root->left = insertBST(root->left, value);
+    else if (value > root->data)
+        root->right = insertBST(root->right, value);
+
+    return root;
+}
+
 // Traversal functions
 void inorder(struct Node* root) {
     if (root == NULL)
@@ -54,9 +69,13 @@ void postorder(struct Node* root) {
 }
 
 int main() {
+
     // Create root
+
+    //struct Node* root = NULL;   // at start empty tree
     struct Node* root = createNode(1);
-    // Manually insert other nodes
+
+    //Manually insert other nodes
     struct Node* left = insertLeft(root, 2);
     struct Node* right = insertRight(root, 3);
     insertLeft(left, 4);

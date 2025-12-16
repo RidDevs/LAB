@@ -2,24 +2,22 @@
 using namespace std;
 
 class Student {
-    int roll;
 public:
-    void setRoll(int r) {
-        roll = r;
-    }
-    void display() {
-        cout << roll << endl;
-    }
+    string name;
+    int marks;
 };
 
-int main() {
-    Student s[15];
-    for(int i=0;i<15;i++)
-        s[i].setRoll(i+1);
+int main(){
+    Student s[3];
 
-    for(int i=0;i<15;i++)
-        s[i].display();
+    s[0].name= "helo"; s[0].marks=99;
+    s[1].name= "helo"; s[1].marks=99;
+    s[2].name= "helo"; s[2].marks=99;
+
+    for(int i=0;i<3;i++){
+        cout<< s[i].name<<"scored"<<s[i].marks<<endl;
+    }
 
     return 0;
-}
 
+}

@@ -11,6 +11,7 @@ struct Node* rear = NULL;
 
 void enqueue(int value) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    
     if (newNode == NULL) {
         printf("MemoryERROR!\n");
         return;

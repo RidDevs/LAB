@@ -8,12 +8,14 @@ public:
     }
 };
 
+
 class Manager : public Employee {
 public:
     void work() {
         cout << "manager manage team." << endl;
     }
 };
+
 
 int main() {
     Employee *e;     

@@ -2,6 +2,7 @@
 using namespace std;
 
 template <class T>
+
 class Box {
 public:
     T value;

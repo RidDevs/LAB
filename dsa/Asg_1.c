@@ -1,8 +1,8 @@
 #include <stdio.h>
-
-
 #define MAX_SIZE 123
+
 int i,j;
+
 void insert(int arr[], int *n, int value, int pos) {
     if (*n >= MAX_SIZE || pos < 0 || pos > *n) {
         printf("Insertion not possible.\n");
@@ -85,7 +85,7 @@ int main() {
                     printf("Value not found.\n");
                 break;
             case 4:
-                printf("Unorted Array.\n");
+                printf("Unsorted Array.\n");
                 display(arr, n);
                 sort(arr, n);
                 printf("Sorted Array.\n");

@@ -1,8 +1,8 @@
 FILENAME = "books.txt"
 
-# -----------------------------------------
+
 # Add a new book
-# -----------------------------------------
+
 def add_book():
     isbn = input("Enter ISBN: ")
     name = input("Enter Book Name: ")
@@ -13,9 +13,10 @@ def add_book():
 
     print("\nBook added!\n")
 
-# -----------------------------------------
+
 # Search for a book
-# -----------------------------------------
+
+
 def search_book():
     try:
         f = open(FILENAME, "r")
@@ -54,9 +55,9 @@ def search_book():
     if not found:
         print("\nNo matching book found!\n")
 
-# -----------------------------------------
+
 # Modify a book
-# -----------------------------------------
+
 def modify_book():
     try:
         f = open(FILENAME, "r")
@@ -91,9 +92,9 @@ def modify_book():
     else:
         print("\nBook not found!\n")
 
-# -----------------------------------------
+
 # Menu
-# -----------------------------------------
+
 def menu():
     while True:
         print("----- Book Management System -----")

@@ -2,20 +2,24 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define N 1000000   
+// #define N 1000000   
 
-int arr[N];         
-void unique_numbers() {
-    int i;
-    for ( i = 0; i < N; i++){
-        arr[i] = i + 1;  }
-    for ( i = N - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-}
+// int arr[N];         
+
+// void unique_numbers() {
+//     int i;
+//     for ( i = 0; i < N; i++){
+//         arr[i] = i + 1;  }
+//     for ( i = N - 1; i > 0; i--) {
+//         int j = rand() % (i + 1);
+//         int temp = arr[i];
+//         arr[i] = arr[j];
+//         arr[j] = temp;
+//     }
+// }
+
+int arr[10]={2,56,78,566,789,34,23,24,56,78};         
+
 
 
 void bubble_sort(int arr[],int len){
@@ -48,8 +52,7 @@ void insertion_sort(int arr[],int len){
 void selection_sort(int arr[],int len){
     int i,j,min;
     for(i=0;i<len;i++){
-        min=i;
-        
+        min=i;        
         for(j=i+1;j<len;j++){
             
             if(arr[j]<arr[min]){
@@ -60,7 +63,7 @@ void selection_sort(int arr[],int len){
            
                 int temp;
                 temp=arr[i];
-                arr[i]=arr[min];
+                arr[i]=arr[min];  //swap i and min
                 arr[min]=temp;
             }
         }
@@ -158,6 +161,7 @@ void quick_sort(int arr[],int left,int right){
         quick_sort( arr, lock+1, right);
     }
 }
+
 
 int main() {
     int choice ;
