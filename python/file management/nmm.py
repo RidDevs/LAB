@@ -1,7 +1,7 @@
 FILENAME = "books.txt"
 
 
-# Add a new book
+# Add 
 
 def add_book():
     isbn = input("Enter ISBN: ")
@@ -14,7 +14,7 @@ def add_book():
     print("\nBook added!\n")
 
 
-# Search for a book
+# Search 
 
 
 def search_book():
@@ -56,7 +56,7 @@ def search_book():
         print("\nNo matching book found!\n")
 
 
-# Modify a book
+# Modify 
 
 def modify_book():
     try:

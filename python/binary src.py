@@ -23,17 +23,16 @@ def binary_search(arr, key):
 
     return -1
 
-
 n = int(input("Enter number of elements: "))
 arr = []
 
 for i in range(n):
     arr.append(int(input("Enter element: ")))
 
-key = int(input("Enter element to search: "))
-
 bubble_sort(arr)
 print("Sorted list:", arr)
+
+key = int(input("Enter element to search: "))
 
 result = binary_search(arr, key)
 

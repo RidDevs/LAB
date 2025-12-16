@@ -3,8 +3,6 @@ from tkinter import messagebox
 
 FILENAME = "books.txt"
 
-# ------------------ Functions ------------------
-
 def add_book():
     isbn = entry_isbn.get().strip()
     name = entry_name.get().strip()
@@ -98,7 +96,7 @@ def modify_book():
         
 
 
-# ------------------ GUI ------------------
+# GUI
 
 root = tk.Tk()
 root.title("Book Management System")
@@ -120,7 +118,7 @@ entry_author.pack()
 tk.Button(root, text="Add Book", command=add_book).pack(pady=10)
 
 
-# ----- Search Section -----
+# Search 
 tk.Label(root, text="Search Book", font=("Arial", 12, "bold")).pack(pady=5)
 tk.Label(root, text="Enter ISBN/Name/Author:").pack()
 

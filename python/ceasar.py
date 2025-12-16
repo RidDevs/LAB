@@ -1,8 +1,8 @@
 #ceasear is cypher
 
 text = "the brown fox went over the lazy dog"
-
 letters = "abcdefghijklmnopqrstuvwxyz"
+
 shift_amount = 3  
 result = ""
 
