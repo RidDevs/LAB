@@ -14,7 +14,7 @@ def add_book():
         return
 
     f = open(FILENAME, "a")
-    f.write(isbn + "|" + name + "|" + author + "\n")
+    f.write(isbn+ "|"+name+"|"+author + "\n")
     f.close()
 
     messagebox.showinfo("Success", "Book Added")
@@ -67,7 +67,7 @@ entry_name.pack()
 entry_author = tk.Entry(root)
 entry_author.pack()
 
-tk.Button(root, text="Add Book", command=add_book).pack(pady=10)
+tk.Button(root, text="Add Book", command=add_book).pack()
 
 tk.Label(root, text="Search Book").pack()
 
