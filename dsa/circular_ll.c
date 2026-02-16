@@ -49,6 +49,7 @@ void insertEnd(int value) {
     printf("%d inserted at end.\n", value);
 }
 
+
 void insertPos(int value, int pos) {
     int i;
     struct Node* newNode = createNewNode(value);

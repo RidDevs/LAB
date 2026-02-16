@@ -8,7 +8,6 @@ public:
     Student() {
         marks = 85;
     }
-
     friend class Teacher;   // Teacher is a friend
 };
 
@@ -20,8 +19,8 @@ public:
 };
 
 int main() {
-    Student s;
+    Student s1;
     Teacher t;
-    t.showMarks(s);
+    t.showMarks(s1);
     return 0;
 }
