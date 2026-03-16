@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>validation</title>
+</head>
+
+<body>
+
+<h2>registration Form</h2>
+
+<form>
+
+<label>Name</label>
+<input type="text" name="name" required maxlength="30">
+<br><br>
+
+<label>mail</label>
+<input type="email" name="email" required autocomplete="on">
+<br><br>
+
+<label>Dept-</label>
+
+<input 
+type="text"
+name="dept"
+list="departments"
+required
+pattern="(CE|CS|EE|IE|ME|ce|cs|ee|ie|me)"
+title="Only CE, CS, EE, IE, ME allowed">
+
+<datalist id="departments">
+<option value="CE">
+<option value="CS">
+<option value="EE">
+<option value="IE">
+<option value="ME">
+</datalist>
+<br><br>
+
+<label>Semester:</label>
+<input 
+type="number" 
+name="semester" 
+min="1" 
+max="8" 
+value="4" 
+required>
+
+<br><br>
+
+<input type="submit" value="Submit">
+
+</form>
+
+</body>
+</html>
