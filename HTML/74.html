@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>overflow</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        .box {
+            width: 250px;
+            height: 100px;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 10px;
+        }
+
+        .visible {
+            overflow: visible;
+            background-color: rgb(79, 119, 133);
+        }
+
+        .hidden {
+            overflow: hidden;
+            background-color: lightcoral;
+        }
+
+        .scroll {
+            overflow: scroll;
+            background-color: rgb(55, 131, 55);
+        }
+
+        .auto {
+            overflow: auto;
+            background-color: lightyellow;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Overflow visible</h2>
+    <div class="box visible">
+        visible visible   visible visible  visible visible  visible visible  visible visible  visible visible  visible visible  visible visible  visible visible  visible visible  visible visible  visible visible  visible visible  visible visible  visible visible  visible visible  visible visible
+    </div>
+
+    <h2>Overflow hidden</h2>
+    <div class="box hidden">
+        hidden below hidden hidden below hidden below hidden below hidden below hidden below hidden belown\ below 
+    </div>
+
+    <h2>Overflow scroll</h2>
+    <div class="box scroll">
+        scroll always scroll always scroll always
+         
+    </div>
+
+    <h2>Overflow auto</h2>
+    <div class="box auto">
+        scroll when needed scroll when needed scroll when needed scroll when needed scroll when needed scroll when needed scroll when needed scroll when needed scroll when needed 
+    </div>
+
+</body>
+</html>

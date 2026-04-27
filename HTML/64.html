@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>animation</title>
+  <style>
+    .b {
+      width: 150px;
+      height: 90px;
+      background-color: blue;
+      position: relative;
+      animation: moveBox 10s infinite;
+      padding:10px 10px 10 
+    }
+
+    @keyframes moveBox {
+      0%   { left: 0; }
+      50%  { left: 900px; }
+      100% { left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="b"><h1>This is animation</h1></div>
+
+</body>
+</html>

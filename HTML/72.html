@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Position Demo</title>
+    <style>
+        body {
+            height: 2000px; 
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            
+        }
+        .relative {
+            position: relative;
+            top: 20px;
+            left: 20px;
+            background-color: rgb(176, 176, 214);
+        }
+        .absolute {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background-color: rgb(145, 105, 105);
+        }
+        .fixed {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgb(69, 102, 69);
+        }
+        .sticky {
+            position: sticky;
+            top: 0;
+            background-color: rgb(214, 151, 214);
+        }        
+    </style>
+</head>
+<body>
+    <div class="box relative">relative</div>
+    <div class="box absolute">absolute</div>
+    <div class="box fixed">fixed</div>
+    <div class="box sticky">sticky</div>
+    <p>Scroll</p>
+</body>
+</html>
