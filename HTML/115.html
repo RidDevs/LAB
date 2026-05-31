@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>String Method(string is Hello World)</h2>
+<p id="output"></p>
+
+<script>
+let str = "Hello World"
+
+let result = ""
+
+result += "<p>1.charAt-- character at index 1 of str:</p>" + str.charAt(1) + "<br>"
+result += "<p>2.indexOf-- index of w:</p>" +str.indexOf("W") + "<br>"
+result += "<p>3.concat-- adding new word to the string:</p>" +str.concat(" JS") + "<br>"
+result += "<p>4.match-- returning the content if its present in the string:</p>" +str.match(/o/g) + "<br>"
+result += "<p>5.replace-- relacing a word with other:</p>" +str.replace("World", "JavaScript") + "<br>"
+result += "<p>6.trim-- clearing the extra spaces:</p>" +"   heloo  ".trim()
+
+document.getElementById("output").innerHTML = result
+</script>
+
+</body>
+</html>

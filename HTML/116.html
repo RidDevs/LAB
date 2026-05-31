@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Date Methods</h2>
+<p id="output"></p>
+
+<script>
+let d = new Date()
+
+let result = ""
+
+result += "milliseconds since 01jan 1970 <br>"
+result += d.getTime() + "<br><br>"
+result += "month <br>"
+result += (d.getMonth()+1) + "<br><br>"
+result += "date <br>"
+result += d.getDate()
+
+document.getElementById("output").innerHTML = result
+</script>
+
+</body>
+</html>

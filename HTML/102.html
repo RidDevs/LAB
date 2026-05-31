@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>+-check</title>
+</head>
+<body>
+
+<button onclick="checkNumber()">Check +/-</button>
+
+<script>
+function checkNumber() {
+    let num = parseInt(prompt("Enter number:"));
+
+    if (num > 0) {
+        alert("Positive ");
+    } else if (num < 0) {
+        alert("Negative ");
+    } else {
+        alert("Zero, neither");
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Array Methods</h2>
+<p id="output"></p>
+
+<script>
+let arr = [1, 2, 3];
+let arr2 = [4, 5];
+
+let result = "";
+
+result += "concat: " + arr.concat(arr2) + "<br>";
+
+result += "join(first array): " + arr.join("-") + "<br>";
+
+result += "indexOf(element 3 in first array): " + arr.indexOf(3) + "<br>";
+
+let sorted = [...arr].sort((a, b) => b - a);
+result += "sort(first array in decreasing order): " + sorted + "<br>";
+
+
+let temp1 = [...arr];
+temp1.pop();
+result += "pop:(last element) " + temp1 + "<br>";
+
+let temp2 = [...arr];
+temp2.push(10);
+result += "push 10: " + temp2 + "<br>";
+
+
+result += "find in first array(x>1, first element thats greater than 1): " + arr.find(x => x > 1) + "<br>";
+
+
+let temp3 = [...arr];
+temp3.shift();
+result += "shift: first array " + temp3 + "<br>";
+
+
+let temp4 = [...arr];
+temp4.unshift(99);
+result += "unshift: " + temp4 + "<br>";
+
+result += "slice(1,3): " + arr.slice(1, 3) + "<br>";
+
+
+let temp5 = [...arr];
+temp5.splice(1, 1, 99); 
+result += "splice: " + temp5 + "<br>";
+
+document.getElementById("output").innerHTML = result;
+</script>
+
+<p><b>Initial Arrays:</b> [1,2,3] & [4,5]</p>
+
+</body>
+</html>

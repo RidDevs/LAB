@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>mouse image</title>
+</head>
+<body>
+
+<h2>hover the mouse</h2>
+
+<img src="1.jpeg"
+     id="img"
+     width="300"
+     onmouseover="img2()"
+     onmouseout="img1()">
+
+<script>
+function img1() {
+    document.getElementById("img").src = "1.jpeg";
+}
+function img2() {
+    document.getElementById("img").src = "2.jpeg";
+}
+
+
+</script>
+
+</body>
+</html>

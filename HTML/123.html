@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+</head>
+<body>
+    <div class="timer-box">
+        <h2>Timer</h2>
+        <div id="timer-display">10</div>
+    </div>
+    <script>
+        let timeLeft = 10;
+        const displayElement = document.getElementById('timer-display');
+        const countdownInterval = setInterval(function() {
+            displayElement.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                alert("Timeout! Countdown khotom ");
+            } else {
+                timeLeft--;
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
