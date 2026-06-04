@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input id="n1" type="number">N1<br>
+    <input id="n2" type="number">N2<br>
+    <input id="result" type="text"readonly>RESULT<br>
+
+ <button onclick="add()">add</button>
+ <button onclick="sub()">sub</button>
+  <button onclick="mul()">mul</button>
+  <button onclick="div()">div</button>
+  <button onclick="clr()">clr</button>
+
+  <script >
+    function add(){
+        let a=parseInt(document.getElementById("n1").value);
+        let b=parseInt(document.getElementById("n2").value);
+
+        let res= a+b;
+         document.getElementById("result").value = res;
+    }
+    function sub(){
+            let a=parseInt(document.getElementById("n1").value);
+        let b=parseInt(document.getElementById("n2").value);
+
+        let res= a-b;
+         document.getElementById("result").value = res;
+    }
+    function mul(){
+        let a=parseInt(document.getElementById("n1").value);
+        let b=parseInt(document.getElementById("n2").value);
+        let res= a*b;
+         document.getElementById("result").value = res;
+    }
+    function div(){
+        let a=parseInt(document.getElementById("n1").value);
+        let b=parseInt(document.getElementById("n2").value);
+        let res= a/b;
+         document.getElementById("result").value = res;
+    }
+     function clr(){
+        document.getElementById("n1").value = "";
+         document.getElementById("n2").value = "";
+         document.getElementById("result").value = "";
+    }
+    
+  </script>
+
+</body>
+</html>

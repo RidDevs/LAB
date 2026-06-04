@@ -18,6 +18,7 @@
   "homepage": "https://github.com/RidDevs/python#readme",
   "dependencies": {
     "express": "^5.2.1",
+    "mongoose": "^9.6.3",
     "react-router-dom": "^7.16.0"
   }
 }

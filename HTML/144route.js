@@ -5,8 +5,8 @@ router.get("/", (req, res) => {
     res.send("All Users");
 });
 
-router.get("/:id", (req, res) => {
-    res.send(`User ID: ${req.params.id}`);
+router.get("/1", (req, res) => {
+    res.send(`User ID: 1`);
 });
 
 module.exports = router;

@@ -1,4 +1,4 @@
-import UserList from "./userlist";
+import List from "./list";
 
 function App() {
   const users = [
@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <h2>User List</h2>
-      <UserList users={users} />
+      <List users={users} />
     </>
   );
 }

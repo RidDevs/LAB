@@ -1,7 +1,12 @@
 fetch("https://jsonplaceholder.typicode.com/users")
     .then(response => response.json())
     .then(data => {
-        console.log("Users:");
+        
         console.log(data);
-    })
-    .catch(error => console.log(error));
+    });
+
+
+
+
+
+    // .catch(error => console.log(error));
