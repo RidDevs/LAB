@@ -42,14 +42,15 @@ int main(){
                     read(ar1[0],b,24);
                     printf("\n parent process \n");
                     printf("data recieving \n");
-                  
-                    bubble_sort(b,6);
+                    
                     int x;
                     for(x=0;x<6;x++)
                     {printf("%d,",b[x]);}
+                  
+                    bubble_sort(b,6);
+                    
                     
                     int max=b[5];
-
                     write(ar2[1],&max,4);
                     
                 }
