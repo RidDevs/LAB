@@ -1,9 +1,9 @@
 const express = require("express");
-const userRoutes = require("./144route");
-
 const app = express();
 
-app.use("/users", userRoutes);
+const userRoutes = require("./144route");
+
+app.use("/user", userRoutes);
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");

@@ -13,6 +13,7 @@
     <script>
         let timeLeft = 10;
         const displayElement = document.getElementById('timer-display');
+        
         const countdownInterval = setInterval(function() {
             displayElement.textContent = timeLeft;
             if (timeLeft <= 0) {

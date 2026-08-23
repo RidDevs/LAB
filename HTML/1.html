@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Console Test</title>
+</head>
+<body>
+
+    <h1>Look at the Browser Console to see the Output!</h1>
+
+    <script>
+        try {
+            let age = 19;
+
+            if (age < 18) {
+                throw new Error("Age must be 18 or above");
+            }
+
+            console.log("Access Granted");
+        }
+        catch (err) {
+            console.log(err.message);
+        }
+        finally {
+            console.log("Execution Completed");
+        }
+    </script>
+    
+</body>
+</html>

@@ -9,6 +9,7 @@ const loadData = () => {
     });
 };
 
+
 const processData = (data) => {
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -20,6 +21,7 @@ const processData = (data) => {
         }, 1000);
     });
 };
+
 
 const displayData = (data) => {
     console.log(data);

@@ -9,6 +9,7 @@ const loadData = (callback) => {
     }, 1000);
 };
 
+
 const processData = (data, callback) => {
     setTimeout(() => {
         const processed = data.map(student => ({
@@ -19,6 +20,7 @@ const processData = (data, callback) => {
         callback(processed);
     }, 1000);
 };
+
 
 const displayData = (data) => {
     console.log("Processed Data:");
