@@ -158,3 +158,4 @@ def test_order_service_checkout(order_client):
         assert data["discount_amount"] == 20.0
         assert data["final_total"] == 180.0
         assert data["status"] == "CONFIRMED"
+

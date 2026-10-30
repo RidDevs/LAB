@@ -132,3 +132,4 @@ def apply_discount():
 if __name__ == "__main__":
     print("Starting Discount Service on port 5003...")
     app.run(host="0.0.0.0", port=5003, debug=True)
+
