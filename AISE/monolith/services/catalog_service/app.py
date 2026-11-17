@@ -1,14 +1,22 @@
 """
 Catalog Microservice (Port 5001)
 Responsibilities:
-- Maintain product catalog (name, description, price, stock).
+- Maintain product catalog (name, price, stock).
 - Handle product queries and inventory deductions/restocks.
-- Isolated in-memory database per microservice pattern.
+- Integrated Swagger UI documentation.
 """
 
 from flask import Flask, jsonify, request
+from flasgger import Swagger
 
 app = Flask(__name__)
+app.config["SWAGGER"] = {
+    "title": "Catalog Microservice API",
+    "uiversion": 3,
+    "version": "1.0.0",
+    "description": "Product catalog and inventory management service."
+}
+swagger = Swagger(app)
 
 # Isolated Database for Catalog Service
 products = {
@@ -21,18 +29,51 @@ next_product_id = 4
 
 @app.route("/", methods=["GET"])
 def health():
-    return jsonify({"service": "Catalog Service", "status": "running", "port": 5001}), 200
+    """
+    Service Health Check
+    ---
+    tags:
+      - Health
+    responses:
+      200:
+        description: Service status and port
+    """
+    return jsonify({"service": "Catalog Service", "status": "running", "port": 5001, "docs": "/apidocs/"}), 200
 
 
 @app.route("/products", methods=["GET"])
 def get_products():
-    """Retrieve all products."""
+    """
+    Get all catalog products
+    ---
+    tags:
+      - Products
+    responses:
+      200:
+        description: List of all products in catalog
+    """
     return jsonify(list(products.values())), 200
 
 
 @app.route("/products/<int:product_id>", methods=["GET"])
 def get_product(product_id):
-    """Retrieve details for a single product."""
+    """
+    Get product details by ID
+    ---
+    tags:
+      - Products
+    parameters:
+      - name: product_id
+        in: path
+        type: integer
+        required: true
+        description: ID of the product
+    responses:
+      200:
+        description: Product details
+      404:
+        description: Product not found
+    """
     product = products.get(product_id)
     if not product:
         return jsonify({"error": f"Product {product_id} not found"}), 404
@@ -41,7 +82,36 @@ def get_product(product_id):
 
 @app.route("/products", methods=["POST"])
 def add_product():
-    """Add a new product to the catalog."""
+    """
+    Add a new product to catalog
+    ---
+    tags:
+      - Products
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          required:
+            - name
+            - price
+          properties:
+            name:
+              type: string
+              example: "Gaming Headset"
+            price:
+              type: number
+              example: 59.99
+            stock:
+              type: integer
+              example: 25
+    responses:
+      201:
+        description: Product created successfully
+      400:
+        description: Invalid request data
+    """
     global next_product_id
     data = request.get_json()
     if not data or "name" not in data or "price" not in data:
@@ -69,7 +139,33 @@ def add_product():
 
 @app.route("/products/<int:product_id>/deduct", methods=["POST"])
 def deduct_stock(product_id):
-    """Deduct stock when an order is confirmed."""
+    """
+    Deduct stock for an order
+    ---
+    tags:
+      - Inventory
+    parameters:
+      - name: product_id
+        in: path
+        type: integer
+        required: true
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            quantity:
+              type: integer
+              example: 2
+    responses:
+      200:
+        description: Stock successfully deducted
+      400:
+        description: Insufficient stock or invalid quantity
+      404:
+        description: Product not found
+    """
     data = request.get_json() or {}
     quantity = data.get("quantity", 1)
 
@@ -102,7 +198,31 @@ def deduct_stock(product_id):
 
 @app.route("/products/<int:product_id>/restock", methods=["POST"])
 def restock(product_id):
-    """Restock inventory (compensation transaction if order checkout fails)."""
+    """
+    Restock inventory (compensation rollback)
+    ---
+    tags:
+      - Inventory
+    parameters:
+      - name: product_id
+        in: path
+        type: integer
+        required: true
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            quantity:
+              type: integer
+              example: 2
+    responses:
+      200:
+        description: Stock restored
+      404:
+        description: Product not found
+    """
     data = request.get_json() or {}
     quantity = int(data.get("quantity", 1))
 
@@ -119,6 +239,5 @@ def restock(product_id):
 
 
 if __name__ == "__main__":
-    print("Starting Catalog Service on port 5001...")
+    print("Starting Catalog Service on port 5001 (Swagger: http://127.0.0.1:5001/apidocs/)...")
     app.run(host="0.0.0.0", port=5001, debug=True)
-

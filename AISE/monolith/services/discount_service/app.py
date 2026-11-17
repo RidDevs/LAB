@@ -3,31 +3,39 @@ Discount Microservice (Port 5003)
 Responsibilities:
 - Manage discount coupons and promotions.
 - Validate coupon codes and compute discounts based on order subtotal.
-- Isolated in-memory database per microservice pattern.
+- Integrated Swagger UI documentation.
 """
 
 from flask import Flask, jsonify, request
+from flasgger import Swagger
 
 app = Flask(__name__)
+app.config["SWAGGER"] = {
+    "title": "Discount Microservice API",
+    "uiversion": 3,
+    "version": "1.0.0",
+    "description": "Coupons, promotions, and discount calculation service."
+}
+swagger = Swagger(app)
 
 # Isolated Database for Discount Service
 discounts = {
     "SAVE10": {
         "code": "SAVE10",
         "type": "PERCENT",
-        "value": 10.0,  # 10% discount
+        "value": 10.0,
         "min_order": 0.0,
     },
     "FLAT20": {
         "code": "FLAT20",
         "type": "FLAT",
-        "value": 20.0,  # $20 off
+        "value": 20.0,
         "min_order": 50.0,
     },
     "SUPER50": {
         "code": "SUPER50",
         "type": "PERCENT",
-        "value": 50.0,  # 50% discount
+        "value": 50.0,
         "min_order": 100.0,
     },
 }
@@ -35,18 +43,51 @@ discounts = {
 
 @app.route("/", methods=["GET"])
 def health():
-    return jsonify({"service": "Discount Service", "status": "running", "port": 5003}), 200
+    """
+    Service Health Check
+    ---
+    tags:
+      - Health
+    responses:
+      200:
+        description: Service status and port
+    """
+    return jsonify({"service": "Discount Service", "status": "running", "port": 5003, "docs": "/apidocs/"}), 200
 
 
 @app.route("/discounts", methods=["GET"])
 def get_discounts():
-    """Retrieve all active discounts."""
+    """
+    Retrieve all active discounts
+    ---
+    tags:
+      - Discounts
+    responses:
+      200:
+        description: List of available discount codes
+    """
     return jsonify(list(discounts.values())), 200
 
 
 @app.route("/discounts/<string:code>", methods=["GET"])
 def get_discount(code):
-    """Retrieve a discount coupon by code."""
+    """
+    Get discount coupon details by code
+    ---
+    tags:
+      - Discounts
+    parameters:
+      - name: code
+        in: path
+        type: string
+        required: true
+        example: SAVE10
+    responses:
+      200:
+        description: Coupon details
+      404:
+        description: Discount code not found
+    """
     discount = discounts.get(code.upper())
     if not discount:
         return jsonify({"error": f"Discount code '{code}' not found"}), 404
@@ -55,7 +96,41 @@ def get_discount(code):
 
 @app.route("/discounts", methods=["POST"])
 def create_discount():
-    """Create a new discount code."""
+    """
+    Create a new discount code
+    ---
+    tags:
+      - Discounts
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          required:
+            - code
+            - type
+            - value
+          properties:
+            code:
+              type: string
+              example: FESTIVE25
+            type:
+              type: string
+              enum: ["PERCENT", "FLAT"]
+              example: "PERCENT"
+            value:
+              type: number
+              example: 25.0
+            min_order:
+              type: number
+              example: 50.0
+    responses:
+      201:
+        description: Coupon created
+      400:
+        description: Invalid request parameters
+    """
     data = request.get_json()
     if not data or "code" not in data or "type" not in data or "value" not in data:
         return jsonify({"error": "Missing required fields: 'code', 'type', 'value'"}), 400
@@ -86,8 +161,33 @@ def create_discount():
 @app.route("/discounts/apply", methods=["POST"])
 def apply_discount():
     """
-    Validate and apply discount to a subtotal.
-    Request body: {"coupon_code": "SAVE10", "subtotal": 100.0}
+    Validate and calculate discount for an order subtotal
+    ---
+    tags:
+      - Discounts
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          required:
+            - coupon_code
+            - subtotal
+          properties:
+            coupon_code:
+              type: string
+              example: "SAVE10"
+            subtotal:
+              type: number
+              example: 100.0
+    responses:
+      200:
+        description: Discount calculation result
+      400:
+        description: Subtotal does not meet minimum threshold
+      404:
+        description: Invalid coupon code
     """
     data = request.get_json()
     if not data or "coupon_code" not in data or "subtotal" not in data:
@@ -130,6 +230,5 @@ def apply_discount():
 
 
 if __name__ == "__main__":
-    print("Starting Discount Service on port 5003...")
+    print("Starting Discount Service on port 5003 (Swagger: http://127.0.0.1:5003/apidocs/)...")
     app.run(host="0.0.0.0", port=5003, debug=True)
-

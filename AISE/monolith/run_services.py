@@ -1,10 +1,11 @@
 """
 Microservices Orchestrator & Runner
-Runs all four microservices concurrently on separate ports:
-  - Catalog Service:        http://127.0.0.1:5001
-  - Shopping Cart Service:  http://127.0.0.1:5002
-  - Discount Service:       http://127.0.0.1:5003
-  - Order Service:          http://127.0.0.1:5004
+Runs all microservices plus the Frontend UI concurrently:
+  - Frontend UI Service:    http://127.0.0.1:5000
+  - Catalog Service:        http://127.0.0.1:5001  (Swagger: :5001/apidocs/)
+  - Shopping Cart Service:  http://127.0.0.1:5002  (Swagger: :5002/apidocs/)
+  - Discount Service:       http://127.0.0.1:5003  (Swagger: :5003/apidocs/)
+  - Order Service:          http://127.0.0.1:5004  (Swagger: :5004/apidocs/)
 """
 
 import os
@@ -18,6 +19,7 @@ SERVICES = [
     ("Shopping Cart Service", "services/cart_service/app.py", 5002),
     ("Discount Service", "services/discount_service/app.py", 5003),
     ("Order Service", "services/order_service/app.py", 5004),
+    ("Frontend UI Service", "services/frontend_service/app.py", 5000),
 ]
 
 processes = []
@@ -45,7 +47,13 @@ def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
     print("================================================================")
-    print("  LAUNCHING E-COMMERCE MICROSERVICES ARCHITECTURE")
+    print("  LAUNCHING E-COMMERCE MICROSERVICES & FRONTEND UI")
+    print("================================================================")
+    print("  Frontend Storefront UI : http://127.0.0.1:5000")
+    print("  Catalog Swagger Docs   : http://127.0.0.1:5001/apidocs/")
+    print("  Cart Swagger Docs      : http://127.0.0.1:5002/apidocs/")
+    print("  Discount Swagger Docs  : http://127.0.0.1:5003/apidocs/")
+    print("  Order Swagger Docs     : http://127.0.0.1:5004/apidocs/")
     print("================================================================")
 
     for name, script_rel, port in SERVICES:
@@ -60,17 +68,16 @@ def main():
             bufsize=1,
         )
         processes.append((name, proc, port))
-        time.sleep(0.4)
+        time.sleep(0.3)
 
     print("================================================================")
-    print("  All 4 microservices are active. Press Ctrl+C to terminate.")
+    print("  All services active. Open http://127.0.0.1:5000 in your browser.")
+    print("  Press Ctrl+C to stop all services.")
     print("================================================================")
 
-    # Monitor output from all services
     try:
         while True:
             for name, proc, port in processes:
-                # Read available output non-blocking
                 if proc.stdout:
                     line = proc.stdout.readline()
                     if line:
@@ -86,4 +93,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

@@ -3,18 +3,25 @@ Order Microservice (Port 5004)
 Responsibilities:
 - Orchestrate distributed order checkout.
 - Communicates over HTTP with Catalog Service, Shopping Cart Service, and Discount Service.
-- Manages order lifecycle and historical records.
-- Isolated in-memory database per microservice pattern.
+- Integrated Swagger UI documentation.
 """
 
 import os
 from datetime import datetime, timezone
 import requests
 from flask import Flask, jsonify, request
+from flasgger import Swagger
 
 app = Flask(__name__)
+app.config["SWAGGER"] = {
+    "title": "Order Orchestrator Microservice API",
+    "uiversion": 3,
+    "version": "1.0.0",
+    "description": "Order lifecycle, history, and distributed checkout orchestration service."
+}
+swagger = Swagger(app)
 
-# Configurable Service URLs (Microservice Service Discovery)
+# Configurable Service URLs
 CATALOG_SERVICE_URL = os.getenv("CATALOG_SERVICE_URL", "http://127.0.0.1:5001")
 CART_SERVICE_URL = os.getenv("CART_SERVICE_URL", "http://127.0.0.1:5002")
 DISCOUNT_SERVICE_URL = os.getenv("DISCOUNT_SERVICE_URL", "http://127.0.0.1:5003")
@@ -26,10 +33,20 @@ next_order_id = 1
 
 @app.route("/", methods=["GET"])
 def health():
+    """
+    Service Health Check
+    ---
+    tags:
+      - Health
+    responses:
+      200:
+        description: Service status, port, and dependencies
+    """
     return jsonify({
         "service": "Order Service",
         "status": "running",
         "port": 5004,
+        "docs": "/apidocs/",
         "dependencies": {
             "catalog_service": CATALOG_SERVICE_URL,
             "cart_service": CART_SERVICE_URL,
@@ -40,13 +57,36 @@ def health():
 
 @app.route("/orders", methods=["GET"])
 def get_orders():
-    """Retrieve all orders."""
+    """
+    Retrieve all orders
+    ---
+    tags:
+      - Orders
+    responses:
+      200:
+        description: List of all placed orders
+    """
     return jsonify(list(orders.values())), 200
 
 
 @app.route("/orders/<int:order_id>", methods=["GET"])
 def get_order(order_id):
-    """Retrieve a single order by ID."""
+    """
+    Get order by ID
+    ---
+    tags:
+      - Orders
+    parameters:
+      - name: order_id
+        in: path
+        type: integer
+        required: true
+    responses:
+      200:
+        description: Order record
+      404:
+        description: Order not found
+    """
     order = orders.get(order_id)
     if not order:
         return jsonify({"error": f"Order {order_id} not found"}), 404
@@ -55,7 +95,20 @@ def get_order(order_id):
 
 @app.route("/orders/user/<int:user_id>", methods=["GET"])
 def get_user_orders(user_id):
-    """Retrieve all orders placed by a specific user."""
+    """
+    Get all orders for a specific user
+    ---
+    tags:
+      - Orders
+    parameters:
+      - name: user_id
+        in: path
+        type: integer
+        required: true
+    responses:
+      200:
+        description: Orders placed by the user
+    """
     user_orders = [o for o in orders.values() if o["user_id"] == user_id]
     return jsonify(user_orders), 200
 
@@ -63,13 +116,32 @@ def get_user_orders(user_id):
 @app.route("/orders/checkout", methods=["POST"])
 def checkout():
     """
-    Distributed Checkout Orchestration:
-    1. Fetch user's cart from Shopping Cart Service via HTTP.
-    2. Check product availability and prices with Catalog Service via HTTP.
-    3. Apply discount with Discount Service via HTTP (if coupon code provided).
-    4. Deduct inventory via Catalog Service with rollback compensation on failure.
-    5. Save order in Order Service database.
-    6. Clear user cart in Shopping Cart Service via HTTP.
+    Orchestrated Distributed Checkout
+    ---
+    tags:
+      - Checkout
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          required:
+            - user_id
+          properties:
+            user_id:
+              type: integer
+              example: 101
+            coupon_code:
+              type: string
+              example: "SAVE10"
+    responses:
+      201:
+        description: Order placed successfully
+      400:
+        description: Empty cart, insufficient stock, or invalid coupon
+      503:
+        description: Downstream microservice unavailable
     """
     global next_order_id
     data = request.get_json()
@@ -159,7 +231,6 @@ def checkout():
                 timeout=3,
             )
             if deduct_resp.status_code != 200:
-                # Rollback previously deducted items (Saga compensation pattern)
                 for compensated in deducted_items:
                     requests.post(
                         f"{CATALOG_SERVICE_URL}/products/{compensated['product_id']}/restock",
@@ -172,7 +243,6 @@ def checkout():
 
             deducted_items.append(item)
         except requests.RequestException:
-            # Rollback on network failure
             for compensated in deducted_items:
                 requests.post(
                     f"{CATALOG_SERVICE_URL}/products/{compensated['product_id']}/restock",
@@ -202,7 +272,6 @@ def checkout():
     try:
         requests.delete(f"{CART_SERVICE_URL}/cart/{user_id}", timeout=2)
     except requests.RequestException:
-        # Cart clearing warning (non-fatal for order confirmation)
         pass
 
     return jsonify({
@@ -212,6 +281,5 @@ def checkout():
 
 
 if __name__ == "__main__":
-    print("Starting Order Service on port 5004...")
+    print("Starting Order Service on port 5004 (Swagger: http://127.0.0.1:5004/apidocs/)...")
     app.run(host="0.0.0.0", port=5004, debug=True)
-
